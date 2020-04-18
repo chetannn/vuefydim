@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Settings from '../views/Settings.vue'
+import Users from '../views/Users.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ Vue.use(VueRouter)
     path: '/settings',
     name: 'Settings',
     component: Settings
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users
   }
 ]
 

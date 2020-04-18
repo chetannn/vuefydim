@@ -8,7 +8,12 @@
 
     <v-card-text>
       <v-form>
-        <v-text-field outlined prepend-icon="mdi-account-circle" label="Username"></v-text-field>
+        <v-text-field
+          v-model="username"
+          outlined
+          prepend-icon="mdi-account-circle"
+          label="Username"
+        ></v-text-field>
         <v-text-field
           outlined
           :type="showPassword ? 'text' : 'password'"
@@ -16,13 +21,14 @@
           @click:append="showPassword = !showPassword"
           prepend-icon="mdi-lock"
           label="Password"
+          v-model="password"
         ></v-text-field>
       </v-form>
     </v-card-text>
-    
+
     <v-divider></v-divider>
     <v-card-actions>
-      <v-btn color="primary">Login</v-btn>
+      <v-btn @click="login" color="primary">Login</v-btn>
       <v-btn color="info">Register</v-btn>
     </v-card-actions>
   </v-card>
@@ -31,8 +37,28 @@
 <script>
 export default {
   data: () => ({
-    showPassword: false
-  })
+    showPassword: false,
+    username: "",
+    password: ""
+  }),
+  methods: {
+    login() {
+      const vm = this;
+      const user = {
+        username: vm.username,
+        password: vm.password
+      };
+      this.$http.post("http://localhost:59567/api/users/authenticate", user)
+        .then(({data: resData}) => {
+          console.log("data", resData);
+          this.$http.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${resData.token}`;
+          localStorage.setItem("token", resData.token);
+          this.$router.push({ name: "Dashboard" });
+        });
+    }
+  }
 };
 </script>
 

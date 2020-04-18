@@ -1,29 +1,6 @@
 <template>
   <div>
-    <v-expansion-panels class="mb-4">
-      <v-expansion-panel>
-        <v-expansion-panel-header>Programs</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <v-row>
-            <v-text-field outlined label="Program Name"></v-text-field>
-          </v-row>
-
-          <v-row>
-            <v-checkbox label="Status"></v-checkbox>
-          </v-row>
-
-          <v-row>
-            <v-btn class="mr-4" rounded color="primary">
-              <v-icon>mdi-magnify</v-icon>Search
-            </v-btn>
-            <v-btn rounded class="info">
-              <v-icon>mdi-autorenew</v-icon>Reset
-            </v-btn>
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
-
+    <h1>Users</h1>
     <v-data-table
       :items-per-page="perPage"
       :server-items-length="totalItemsLength"
@@ -35,7 +12,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Programs</v-toolbar-title>
+          <v-toolbar-title>Users</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
@@ -57,14 +34,22 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12" sm="6" md="12">
-                      <v-text-field outlined v-model="editedItem.program_name" label="Program Name"></v-text-field>
+                      <v-text-field outlined v-model="editedItem.username" label="Username"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="12">
-                      <v-textarea
+                      <v-text-field
                         outlined
-                        label="Project Description"
-                        v-model="editedItem.program_description"
-                      ></v-textarea>
+                        label="Email"
+                        v-model="editedItem.email"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="12">
+                      <v-text-field
+                        outlined
+                        label="Password"
+                        type="password"
+                        v-model="editedItem.password"
+                      ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="12" sm="6">
                       <v-checkbox v-model="editedItem.status" label="Status"></v-checkbox>
@@ -110,110 +95,50 @@ export default {
     dialog: false,
     headers: [
       { text: "Id", value: "id" },
-      { text: "Program Name", value: "program_name" },
-      { text: "Program Description", value: "program_description" },
+      { text: "Username", value: "username" },
+      { text: "Email", value: "email" },
       { text: "Status", value: "status" },
       { text: "Actions", value: "actions", sortable: false }
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
-      program_name: "",
-      program_description: "",
+      username: "",
+      password: "",
       status: true
     },
+    totalItemsLength: 0,
+    perPage: 5,
     defaultItem: {
       name: "",
       calories: 0,
       fat: 0,
       carbs: 0,
       protein: 0
-    },
-    totalItemsLength: 0,
-    perPage: 5
+    }
   }),
-
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "New Program" : "Edit Program";
-    }
-  },
-
-  watch: {
-    dialog(val) {
-      val || this.close();
-    }
-  },
-
-  created() {
-    // this.initialize();
-  },
-
   methods: {
-    initialize() {
-      //   this.desserts = [
-      //   ];
-    },
-
-    editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-
-    deleteItem(item) {
-      if (confirm("Are you sure you want to delete this item?")) {
-        this.$http
-          .delete(`programs?id=${item.id}`)
-          .then(res => {
-            if (res.status == 200 && res.data.success) {
-              const index = this.desserts.indexOf(item);
-              this.desserts.splice(index, 1);
-            }
-          });
-      }
-    },
-
-    close() {
-      this.dialog = false;
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      }, 300);
-    },
-
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
-      } else {
-        fetch("programs", {
-          headers: {
-            "content-type": "application/json"
-          },
-          method: "POST",
-          body: JSON.stringify(this.editedItem)
-        })
-          .then(res => res.json())
-          .then(({ data }) => {
-            console.log(data);
-          });
-      }
-      this.close();
-    },
+    editItem(item) {},
+    deleteItem(item) {},
     onPageChange(pageConfig) {
-      console.log("page object:", pageConfig);
-      //ajax request
-      this.$http
+         this.$http
         .get(
-          `programs?page=${pageConfig.page}&pageSize=${pageConfig.itemsPerPage}`
+          `users?page=${pageConfig.page}&pageSize=${pageConfig.itemsPerPage}`
         )
         .then(({ data: resData }) => {
           this.desserts = resData.data;
           this.totalItemsLength = resData.total;
         });
-    }
+    },
+    save() {},
+    close() {},
+    initialize() {}
   },
-  mounted() {}
+  computed: {
+       formTitle() {
+      return this.editedIndex === -1 ? "New User" : "Edit User";
+    }
+  }
 };
 </script>
 

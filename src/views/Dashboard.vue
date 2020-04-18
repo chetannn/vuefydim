@@ -91,7 +91,7 @@
         </v-btn>
       </template>
       <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+        <v-btn color="primary">Reset</v-btn>
       </template>
       <template v-slot:item.status="{ item }">
         <v-chip
@@ -109,21 +109,21 @@ export default {
   data: () => ({
     dialog: false,
     headers: [
-      { text: "Id", value: "id" },
-      { text: "Program Name", value: "program_name" },
-      { text: "Program Description", value: "program_description" },
-      { text: "Status", value: "status" },
-      { text: "Actions", value: "actions", sortable: false }
+      { text: 'Id', value: 'id' },
+      { text: 'Program Name', value: 'program_name' },
+      { text: 'Program Description', value: 'program_description' },
+      { text: 'Status', value: 'status' },
+      { text: 'Actions', value: 'actions', sortable: false }
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
-      program_name: "",
-      program_description: "",
+      program_name: '',
+      program_description: '',
       status: true
     },
     defaultItem: {
-      name: "",
+      name: '',
       calories: 0,
       fat: 0,
       carbs: 0,
@@ -135,7 +135,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Program" : "Edit Program";
+      return this.editedIndex === -1 ? 'New Program' : 'Edit Program';
     }
   },
 
@@ -144,17 +144,7 @@ export default {
       val || this.close();
     }
   },
-
-  created() {
-    // this.initialize();
-  },
-
   methods: {
-    initialize() {
-      //   this.desserts = [
-      //   ];
-    },
-
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -162,15 +152,13 @@ export default {
     },
 
     deleteItem(item) {
-      if (confirm("Are you sure you want to delete this item?")) {
-        this.$http
-          .delete(`programs?id=${item.id}`)
-          .then(res => {
-            if (res.status == 200 && res.data.success) {
-              const index = this.desserts.indexOf(item);
-              this.desserts.splice(index, 1);
-            }
-          });
+      if (confirm('Are you sure you want to delete this item?')) {
+        this.$http.delete(`programs?id=${item.id}`).then(res => {
+          if (res.status == 200 && res.data.success) {
+            const index = this.desserts.indexOf(item);
+            this.desserts.splice(index, 1);
+          }
+        });
       }
     },
 
@@ -186,22 +174,15 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
-        fetch("programs", {
-          headers: {
-            "content-type": "application/json"
-          },
-          method: "POST",
-          body: JSON.stringify(this.editedItem)
-        })
-          .then(res => res.json())
-          .then(({ data }) => {
-            console.log(data);
+        this.$http.post('programs', this.editedItem)
+          .then(({ data: resData }) => {
+            console.log(resData);
           });
       }
       this.close();
     },
     onPageChange(pageConfig) {
-      console.log("page object:", pageConfig);
+      console.log('page object:', pageConfig);
       //ajax request
       this.$http
         .get(

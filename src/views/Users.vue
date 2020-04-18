@@ -37,11 +37,7 @@
                       <v-text-field outlined v-model="editedItem.username" label="Username"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="12">
-                      <v-text-field
-                        outlined
-                        label="Email"
-                        v-model="editedItem.email"
-                      ></v-text-field>
+                      <v-text-field outlined label="Email" v-model="editedItem.email"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="12">
                       <v-text-field
@@ -94,23 +90,23 @@ export default {
   data: () => ({
     dialog: false,
     headers: [
-      { text: "Id", value: "id" },
-      { text: "Username", value: "username" },
-      { text: "Email", value: "email" },
-      { text: "Status", value: "status" },
-      { text: "Actions", value: "actions", sortable: false }
+      { text: 'Id', value: 'id' },
+      { text: 'Username', value: 'username' },
+      { text: 'Email', value: 'email' },
+      { text: 'Status', value: 'status' },
+      { text: 'Actions', value: 'actions', sortable: false }
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       status: true
     },
     totalItemsLength: 0,
     perPage: 5,
     defaultItem: {
-      name: "",
+      name: '',
       calories: 0,
       fat: 0,
       carbs: 0,
@@ -121,7 +117,7 @@ export default {
     editItem(item) {},
     deleteItem(item) {},
     onPageChange(pageConfig) {
-         this.$http
+      this.$http
         .get(
           `users?page=${pageConfig.page}&pageSize=${pageConfig.itemsPerPage}`
         )
@@ -135,8 +131,8 @@ export default {
     initialize() {}
   },
   computed: {
-       formTitle() {
-      return this.editedIndex === -1 ? "New User" : "Edit User";
+    formTitle() {
+      return this.editedIndex === -1 ? 'New User' : 'Edit User';
     }
   }
 };

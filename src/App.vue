@@ -40,6 +40,7 @@ export default {
   methods: {
     toggleTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      localStorage.setItem('darkMode', this.$vuetify.theme.dark);
     },
     toggleDrawer() {
       this.drawer = !this.drawer;
@@ -48,6 +49,14 @@ export default {
   computed: {
     hasDarkMode() {
       return this.$vuetify.theme.dark;
+    }
+  },
+  created() {
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode === 'true') {
+      this.$vuetify.theme.dark = true;
+    } else {
+      this.$vuetify.theme.dark = false;
     }
   }
 };

@@ -4,8 +4,8 @@
       <v-toolbar-title class="white--text">{{navTitle}}</v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <v-btn text to="/register" rounded class="mr-4">Register</v-btn>
-      <v-btn text rounded to="/login" class="mr-4">Login</v-btn>
+      <v-btn v-if="!loggedIn" text to="/register" rounded class="mr-4">Register</v-btn>
+      <v-btn v-if="!loggedIn" text rounded to="/login" class="mr-4">Login</v-btn>
 
       <v-btn text icon rounded @click="$emit('toggleTheme')" class="mr-4">
         <v-icon>mdi-theme-light-dark</v-icon>
@@ -15,7 +15,7 @@
         <v-icon class="mr-4">mdi-bell-outline</v-icon>
       </v-btn>
 
-      <v-menu class="mr-4" offset-y>
+      <v-menu v-if="loggedIn" class="mr-4" offset-y>
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-avatar size="40">
@@ -43,7 +43,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item @click="logout">
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
@@ -59,9 +59,20 @@
 </template>
 
 <script>
+import { authComputed  } from '@/store/helpers'
+
 export default {
     name: 'Navbar',
-    props: ['navTitle']
+    props: ['navTitle'],
+    computed: {
+      ...authComputed
+    },
+    methods: {
+      logout() {
+        console.log('logout')
+        this.$store.dispatch('logout')
+      }
+    }
 }
 </script>
 

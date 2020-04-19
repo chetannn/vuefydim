@@ -16,7 +16,7 @@ const auth = {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       localStorage.setItem('token', token);
     },
-    CLEAR_AUTH_TOKEN(state) {
+    CLEAR_AUTH_TOKEN() {
         localStorage.removeItem('token')
         location.reload()
     }

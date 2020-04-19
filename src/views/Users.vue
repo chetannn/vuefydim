@@ -86,6 +86,8 @@
 </template>
 
 <script>
+import axios from '@/services/axiosClient'
+
 export default {
   data: () => ({
     dialog: false,
@@ -117,7 +119,7 @@ export default {
     editItem(item) {},
     deleteItem(item) {},
     onPageChange(pageConfig) {
-      this.$http
+      axios
         .get(
           `users?page=${pageConfig.page}&pageSize=${pageConfig.itemsPerPage}`
         )

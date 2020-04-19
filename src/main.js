@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
 import router from './router';
-import '@/services/axiosClient';
+import axiosClient from '@/services/axiosClient';
 import store from './store'
 
 Vue.config.productionTip = false;
@@ -14,14 +14,13 @@ new Vue({
   created() {
     const tokenString = localStorage.getItem('token');
     if (tokenString) {
-      // const tokenData = JSON.parse(tokenString)
-      // this.$store.commit('SET_USER_DATA', userData)
+      this.$store.commit('SET_AUTH_TOKEN', tokenString)
     }
-    this.$http.interceptors.response.use(
+    axiosClient.interceptors.response.use(
       (response) => response,
       (error) => {
         if (error.response.status === 401) {
-          // this.$store.dispatch('logout')
+          this.$store.dispatch('logout')
         }
         return Promise.reject(error); 
       }

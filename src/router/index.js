@@ -36,6 +36,7 @@ Vue.use(VueRouter)
   {
     path: '/dashboard',
     name: 'Dashboard',
+    meta: { requiresAuth: true},
     component: Dashboard
   },
   {
@@ -54,6 +55,14 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to,from,next) => {
+  const loggedIn = localStorage.getItem('token')
+  if(to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    next('/')
+  }
+  next()
 })
 
 export default router

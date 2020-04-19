@@ -38,8 +38,8 @@
 export default {
   data: () => ({
     showPassword: false,
-    username: "",
-    password: ""
+    username: '',
+    password: ''
   }),
   methods: {
     login() {
@@ -48,15 +48,9 @@ export default {
         username: vm.username,
         password: vm.password
       };
-      this.$http.post("http://localhost:59567/api/users/authenticate", user)
-        .then(({data: resData}) => {
-          console.log("data", resData);
-          this.$http.defaults.headers.common[
-            "Authorization"
-          ] = `Bearer ${resData.token}`;
-          localStorage.setItem("token", resData.token);
-          this.$router.push({ name: "Dashboard" });
-        });
+      this.$store.dispatch('login', user).then(() => {
+        this.$router.push({ name: 'Dashboard' });
+      });
     }
   }
 };

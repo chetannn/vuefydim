@@ -9,7 +9,7 @@
 
       <v-divider></v-divider>
 
-      <v-list>
+      <v-list v-if="loggedIn">
         <v-list-item v-for="item in links" :to="item.route" :key="item.text" link>
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -24,9 +24,14 @@
 </template>
 
 <script>
+import { authComputed  } from '@/store/helpers'
+import { mapGetters } from 'vuex'
 export default {
     name: 'NavigationDrawer',
-    props: ['drawer', 'links', 'drawerTitle', 'drawerSubtitle']
+    props: ['drawer', 'links', 'drawerTitle', 'drawerSubtitle'],
+    computed: {
+      ...authComputed,
+    }
 }
 </script>
 

@@ -105,6 +105,8 @@
 </template>
 
 <script>
+import axios from '@/services/axiosClient'
+
 export default {
   data: () => ({
     dialog: false,
@@ -153,7 +155,7 @@ export default {
 
     deleteItem(item) {
       if (confirm('Are you sure you want to delete this item?')) {
-        this.$http.delete(`programs?id=${item.id}`).then(res => {
+       axios.delete(`programs?id=${item.id}`).then(res => {
           if (res.status == 200 && res.data.success) {
             const index = this.desserts.indexOf(item);
             this.desserts.splice(index, 1);
@@ -174,7 +176,7 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
-        this.$http.post('programs', this.editedItem)
+       axios.post('programs', this.editedItem)
           .then(({ data: resData }) => {
             console.log(resData);
           });
@@ -184,7 +186,7 @@ export default {
     onPageChange(pageConfig) {
       console.log('page object:', pageConfig);
       //ajax request
-      this.$http
+      axios
         .get(
           `programs?page=${pageConfig.page}&pageSize=${pageConfig.itemsPerPage}`
         )

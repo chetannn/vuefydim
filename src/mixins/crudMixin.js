@@ -1,21 +1,30 @@
+import SearchPanel from '@/components/SearchPanel';
+import TableActionButtons from '@/components/TableActionButtons';
+import FormDialog from '@/components/FormDialog';
+
 export const crudMixin = {
+  components: {
+    SearchPanel,
+    FormDialog,
+    TableActionButtons,
+  },
   created() {
     // alert('Hello from mixin');
   },
   data() {
     return {
-        gridData: [],
-        editedIndex: -1,
-        totalItemsLength: 0,
-        perPage: 5,
-        dialog: false,
-    }
+      gridData: [],
+      editedIndex: -1,
+      totalItemsLength: 0,
+      perPage: 5,
+      dialog: false,
+    };
   },
   methods: {
     onPageChange(pageConfig) {
       console.log('page object:', pageConfig);
       //ajax request
-      this.$store.dispatch('getAll', pageConfig).then(({ data: resData }) => {
+      this.getAll(pageConfig).then(({ data: resData }) => {
         this.gridData = resData.data;
         this.totalItemsLength = resData.total;
       });
@@ -24,7 +33,7 @@ export const crudMixin = {
       if (this.editedIndex > -1) {
         Object.assign(this.gridData[this.editedIndex], this.editedItem);
       } else {
-        this.$store.dispatch('save', this.editedItem).then(() => {
+        this.save(this.editedItem).then(() => {
           alert('saved!!!');
         });
       }
@@ -44,13 +53,23 @@ export const crudMixin = {
     },
     deleteItem(item) {
       if (confirm('Are you sure you want to delete this item?')) {
-        this.$store.dispatch('delete', item.id).then((res) => {
+        this.delete(item.id).then((res) => {
           if (res.status == 200 && res.data.success) {
             const index = this.gridData.indexOf(item);
             this.gridData.splice(index, 1);
           }
         });
       }
+    },
+  },
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? 'New Program' : 'Edit Program';
+    },
+  },
+  watch: {
+    dialog(val) {
+      val || this.close();
     },
   },
 };

@@ -1,7 +1,6 @@
 <template>
   <div>
     <SearchPanel title="Programs" />
-   <v-btn @click.stop="open">Open Modal</v-btn>
     <v-data-table
       :items-per-page="perPage"
       :server-items-length="totalItemsLength"
@@ -42,20 +41,13 @@
 </template>
 
 <script>
-import axios from '@/services/axiosClient';
-import SearchPanel from '@/components/SearchPanel';
-import TableActionButtons from '@/components/TableActionButtons';
-import FormDialog from '@/components/FormDialog';
-
 // mixins
 import {  crudMixin } from '@/mixins/crudMixin'
+import { mapActions } from 'vuex'
+
+import { crudActions } from '@/store/helpers'
 
 export default {
-  components: {
-    SearchPanel,
-    FormDialog,
-    TableActionButtons
-  },
   mixins: [crudMixin],
   data: () => ({
     headers: [
@@ -77,16 +69,9 @@ export default {
       status: true
     },
   }),
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? 'New Program' : 'Edit Program';
-    }
-  },
-  watch: {
-    dialog(val) {
-      val || this.close();
-    }
-  },
+  methods: {
+    ...crudActions
+  }
 };
 </script>
 

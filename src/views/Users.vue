@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Users</h1>
+    <SearchPanel title="Users" />
     <v-data-table
       :items-per-page="perPage"
       :server-items-length="totalItemsLength"
@@ -64,12 +65,7 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-btn @click="editItem(item)" rounded small dark class="ma-2" color="green">
-          <v-icon>mdi-pencil</v-icon>
-        </v-btn>
-        <v-btn @click="deleteItem(item)" rounded small dark class="ma-2" color="red">
-          <v-icon>mdi-delete</v-icon>
-        </v-btn>
+       <TableActionButtons @editItem="editItem(item)" @deleteItem="deleteItem(item)" />
       </template>
       <template v-slot:no-data>
         <v-btn color="primary" @click="initialize">Reset</v-btn>
@@ -86,9 +82,16 @@
 </template>
 
 <script>
-import axios from '@/services/axiosClient'
+import axios from '@/services/axiosClient';
+import SearchPanel from '@/components/SearchPanel'
+import TableActionButtons from '@/components/TableActionButtons';
+
 
 export default {
+  components: {
+    SearchPanel,
+    TableActionButtons
+  },
   data: () => ({
     dialog: false,
     headers: [

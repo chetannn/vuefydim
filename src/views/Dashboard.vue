@@ -43,9 +43,9 @@
 <script>
 // mixins
 import {  crudMixin } from '@/mixins/crudMixin'
-import { mapActions } from 'vuex'
-
-import { crudActions } from '@/store/helpers'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('programs')
+import { defaultActionTypes } from '@/store/helpers'
 
 export default {
   mixins: [crudMixin],
@@ -57,7 +57,6 @@ export default {
       { text: 'Status', value: 'status' },
       { text: 'Actions', value: 'actions', sortable: false }
     ],
-  
     editedItem: {
       program_name: '',
       program_description: '',
@@ -70,7 +69,7 @@ export default {
     },
   }),
   methods: {
-    ...crudActions
+    ...mapActions(defaultActionTypes)
   }
 };
 </script>

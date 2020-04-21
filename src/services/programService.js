@@ -4,7 +4,7 @@ const programService = {
     async getAll(pageConfig) {
         return axios.get(`programs?page=${pageConfig.page}&pageSize=${pageConfig.itemsPerPage}`)
     },
-    async save(program) {
+    async insert(program) {
         return axios.post('programs', program);
     },
     async delete(id) {

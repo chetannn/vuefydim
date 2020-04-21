@@ -7,7 +7,7 @@
       :server-items-length="totalItemsLength"
       @pagination="onPageChange"
       :headers="headers"
-      :items="desserts"
+      :items="gridData"
       sort-by="calories"
       class="elevation-1"
     >
@@ -65,10 +65,10 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-       <TableActionButtons @editItem="editItem(item)" @deleteItem="deleteItem(item)" />
+        <TableActionButtons @editItem="editItem(item)" @deleteItem="deleteItem(item)" />
       </template>
       <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+        <v-btn color="primary">Reset</v-btn>
       </template>
       <template v-slot:item.status="{ item }">
         <v-chip
@@ -82,18 +82,16 @@
 </template>
 
 <script>
-import axios from '@/services/axiosClient';
-import SearchPanel from '@/components/SearchPanel'
-import TableActionButtons from '@/components/TableActionButtons';
+//mixin
+import { crudMixin } from '@/mixins/crudMixin';
 
+import { createNamespacedHelpers } from 'vuex';
+const {  mapActions } = createNamespacedHelpers('users');
+import { defaultActionTypes } from '@/store/helpers';
 
 export default {
-  components: {
-    SearchPanel,
-    TableActionButtons
-  },
+    mixins: [crudMixin],
   data: () => ({
-    dialog: false,
     headers: [
       { text: 'Id', value: 'id' },
       { text: 'Username', value: 'username' },
@@ -101,45 +99,29 @@ export default {
       { text: 'Status', value: 'status' },
       { text: 'Actions', value: 'actions', sortable: false }
     ],
-    desserts: [],
-    editedIndex: -1,
     editedItem: {
+      id: 0,
       username: '',
+      email: '',
       password: '',
       status: true
     },
-    totalItemsLength: 0,
-    perPage: 5,
     defaultItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
+      id: 0,
+      username: '',
+      email: '',
+      password: '',
+      status: true
     }
   }),
   methods: {
-    editItem(item) {},
-    deleteItem(item) {},
-    onPageChange(pageConfig) {
-      axios
-        .get(
-          `users?page=${pageConfig.page}&pageSize=${pageConfig.itemsPerPage}`
-        )
-        .then(({ data: resData }) => {
-          this.desserts = resData.data;
-          this.totalItemsLength = resData.total;
-        });
-    },
-    save() {},
-    close() {},
-    initialize() {}
+    ...mapActions(defaultActionTypes)
   },
-  computed: {
+   computed: {
     formTitle() {
       return this.editedIndex === -1 ? 'New User' : 'Edit User';
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,4 +1,4 @@
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 const crudActionTypes = {
     getAll: 'getAll',
@@ -6,10 +6,13 @@ const crudActionTypes = {
     delete: 'delete'
 }
 
+export const defaultActionTypes = ['getAll', 'insert', 'delete', 'update']
+
 export const authComputed = {
     ...mapGetters(['loggedIn'])
 }
 
-export const crudActions = {
-    ...mapActions(crudActionTypes)
+
+export function getMappedActions(storeModuleName) {
+    return defaultActionTypes.map(act => `${storeModuleName}/${act}`)
 }

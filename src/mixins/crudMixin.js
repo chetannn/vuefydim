@@ -1,15 +1,14 @@
 import SearchPanel from '@/components/SearchPanel';
 import TableActionButtons from '@/components/TableActionButtons';
-import FormDialog from '@/components/FormDialog';
 
 export const crudMixin = {
   components: {
     SearchPanel,
-    FormDialog,
     TableActionButtons,
   },
   created() {
     // alert('Hello from mixin');
+    // Life cycle hooks of mixins are called before that of components
   },
   data() {
     return {
@@ -23,7 +22,6 @@ export const crudMixin = {
   methods: {
     onPageChange(pageConfig) {
       console.log('page object:', pageConfig);
-      //ajax request
       this.getAll(pageConfig).then(({ data: resData }) => {
         this.gridData = resData.data;
         this.totalItemsLength = resData.total;
@@ -31,9 +29,12 @@ export const crudMixin = {
     },
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.gridData[this.editedIndex], this.editedItem);
+        this.update(this.editedItem).then(() => {
+          // Object.assign(this.gridData[this.editedIndex], this.editedItem);
+          alert('updated!!!');
+        })
       } else {
-        this.save(this.editedItem).then(() => {
+        this.insert(this.editedItem).then(() => {
           alert('saved!!!');
         });
       }
@@ -62,11 +63,7 @@ export const crudMixin = {
       }
     },
   },
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? 'New Program' : 'Edit Program';
-    },
-  },
+ 
   watch: {
     dialog(val) {
       val || this.close();

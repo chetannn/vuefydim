@@ -7,7 +7,7 @@
     <v-divider></v-divider>
 
     <v-card-text>
-      <v-form>
+      <v-form id="loginForm" @submit.prevent="login">
         <v-text-field
           v-model="username"
           outlined
@@ -28,7 +28,7 @@
 
     <v-divider></v-divider>
     <v-card-actions>
-      <v-btn @click="login" color="primary">Login</v-btn>
+      <v-btn type="submit" form="loginForm" color="primary">Login</v-btn>
       <v-btn color="info">Register</v-btn>
     </v-card-actions>
   </v-card>
@@ -38,8 +38,8 @@
 export default {
   data: () => ({
     showPassword: false,
-    username: '',
-    password: ''
+    username: 'demo',
+    password: 'demo'
   }),
   methods: {
     login() {
@@ -49,7 +49,7 @@ export default {
         password: vm.password
       };
       this.$store.dispatch('login', user).then(() => {
-        this.$router.push({ name: 'Dashboard' });
+        this.$router.push({ name: 'Users' });
       });
     }
   }

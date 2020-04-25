@@ -32,7 +32,7 @@ export const crudMixin = {
         this.update(this.editedItem).then(() => {
           // Object.assign(this.gridData[this.editedIndex], this.editedItem);
           alert('updated!!!');
-        })
+        });
       } else {
         this.insert(this.editedItem).then(() => {
           alert('saved!!!');
@@ -52,8 +52,12 @@ export const crudMixin = {
         this.editedIndex = -1;
       }, 300);
     },
-    deleteItem(item) {
-      if (confirm('Are you sure you want to delete this item?')) {
+    async deleteItem(item) {
+      const res = await this.$confirm('Are you sure you want to delete this item?', {
+        title: 'Delete Item',
+        color: 'red'
+      });
+      if (res) {
         this.delete(item.id).then((res) => {
           if (res.status == 200 && res.data.success) {
             const index = this.gridData.indexOf(item);
@@ -63,10 +67,16 @@ export const crudMixin = {
       }
     },
   },
- 
+
   watch: {
     dialog(val) {
       val || this.close();
     },
+  },
+  mounted() {
+    const pageConfig = {
+      page: 1,
+      pageSize: 5,
+    };
   },
 };

@@ -5,9 +5,9 @@
     <v-data-table
       :items-per-page="perPage"
       :server-items-length="totalItemsLength"
-      @pagination="onPageChange"
       :headers="headers"
       :items="gridData"
+      :options.sync="pagination"
       sort-by="calories"
       class="elevation-1"
     >

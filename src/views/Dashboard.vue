@@ -4,7 +4,7 @@
     <v-data-table
       :items-per-page="perPage"
       :server-items-length="totalItemsLength"
-      @pagination="onPageChange"
+      :options.sync="pagination"
       :headers="headers"
       :items="gridData"
       sort-by="calories"
@@ -42,10 +42,10 @@
 
 <script>
 // mixins
-import {  crudMixin } from '@/mixins/crudMixin'
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('programs')
-import { defaultActionTypes } from '@/store/helpers'
+import { crudMixin } from '@/mixins/crudMixin';
+import { createNamespacedHelpers } from 'vuex';
+const { mapState, mapActions } = createNamespacedHelpers('programs');
+import { defaultActionTypes } from '@/store/helpers';
 
 export default {
   mixins: [crudMixin],
@@ -66,7 +66,7 @@ export default {
       program_name: '',
       program_description: '',
       status: true
-    },
+    }
   }),
   methods: {
     ...mapActions(defaultActionTypes)

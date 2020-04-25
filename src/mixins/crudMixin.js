@@ -17,6 +17,7 @@ export const crudMixin = {
       totalItemsLength: 0,
       perPage: 5,
       dialog: false,
+      pagination: {},
     };
   },
   methods: {
@@ -53,10 +54,13 @@ export const crudMixin = {
       }, 300);
     },
     async deleteItem(item) {
-      const res = await this.$confirm('Are you sure you want to delete this item?', {
-        title: 'Delete Item',
-        color: 'red'
-      });
+      const res = await this.$confirm(
+        'Are you sure you want to delete this item?',
+        {
+          title: 'Delete Item',
+          color: 'red',
+        }
+      );
       if (res) {
         this.delete(item.id).then((res) => {
           if (res.status == 200 && res.data.success) {
@@ -72,11 +76,18 @@ export const crudMixin = {
     dialog(val) {
       val || this.close();
     },
+    pagination: {
+      async handler() {
+        const { page, itemsPerPage } = this.pagination;
+        const pageConfig = {
+          page,
+          pageSize: itemsPerPage,
+        };
+        let  { data: resData }  = await this.getAll(pageConfig);
+        this.gridData = resData.data;
+        this.totalItemsLength = resData.total;
+      },
+    },
   },
-  mounted() {
-    const pageConfig = {
-      page: 1,
-      pageSize: 5,
-    };
-  },
+  mounted() {},
 };

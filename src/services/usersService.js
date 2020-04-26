@@ -2,7 +2,7 @@ import axios from './axiosClient'
 
 const usersService = {
     async getAll(pageConfig) {
-        return axios.get(`users?page=${pageConfig.page}&pageSize=${pageConfig.itemsPerPage}`)
+        return axios.get(`users?page=${pageConfig.page}&pageSize=${pageConfig.pageSize}`)
     },
     async insert(user) {
         return axios.post('users/register', user);

@@ -1,4 +1,5 @@
 import programService from '@/services/programService';
+import { SET_MESSAGE } from '../mutation-types'
 
 const programs = {
   namespaced: true,
@@ -7,7 +8,7 @@ const programs = {
   },
   getters: {},
   mutations: {
-    SET_MESSAGE(state, message) {
+    [SET_MESSAGE](state, message) {
       state.message = message;
     },
   },
@@ -17,7 +18,7 @@ const programs = {
     },
     async save({ commit }, program) {
       let resp = await programService.save(program);
-      commit('SET_MESSAGE', resp.data.message);
+      commit(SET_MESSAGE, resp.data.message);
     },
     async delete({ commit }, id) {
       return programService.delete(id);

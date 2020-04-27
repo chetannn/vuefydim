@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { authComputed  } from '@/store/helpers'
+
 export default {
   data: () => ({
     showPassword: false,
@@ -51,6 +53,14 @@ export default {
       this.$store.dispatch('login', user).then(() => {
         this.$router.push({ name: 'Users' });
       });
+    }
+  },
+  computed: {
+    ...authComputed
+  },
+  created() {
+    if(this.loggedIn) {
+      this.$router.push({ name: 'Users'})
     }
   }
 };

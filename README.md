@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/chetannn/vuefydim/workflows/Node.js%20CI/badge.svg?branch=master)
+
 # frontend-vuetify
 
 ## Project setup

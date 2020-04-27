@@ -28,16 +28,29 @@ export const crudMixin = {
         this.totalItemsLength = resData.total;
       });
     },
-    save() {
+    async save() {
       if (this.editedIndex > -1) {
-        this.update(this.editedItem).then(() => {
-          // Object.assign(this.gridData[this.editedIndex], this.editedItem);
-          alert('updated!!!');
-        });
+        const resUpdate = await this.update(this.editedItem);
+        if (resUpdate.success === 200 && resUpdate.data.success) {
+          alert('Updated!!!');
+          const { page, itemsPerPage } = this.pagination;
+          const pageConfig = {
+            page,
+            pageSize: itemsPerPage,
+          };
+          await this.getAll(pageConfig);
+        }
       } else {
-        this.insert(this.editedItem).then(() => {
-          alert('saved!!!');
-        });
+        const resInsert = await this.insert(this.editedItem);
+        if (resInsert.success === 200 && resInsert.data.success) {
+          alert('Saved!!!');
+          const { page, itemsPerPage } = this.pagination;
+          const pageConfig = {
+            page,
+            pageSize: itemsPerPage,
+          };
+          await this.getAll(pageConfig);
+        }
       }
       this.close();
     },
@@ -62,8 +75,8 @@ export const crudMixin = {
         }
       );
       if (res) {
-        this.delete(item.id).then((res) => {
-          if (res.status == 200 && res.data.success) {
+        this.delete(item.id).then((response) => {
+          if (response.status == 200 && response.data.success) {
             const index = this.gridData.indexOf(item);
             this.gridData.splice(index, 1);
           }
@@ -83,7 +96,7 @@ export const crudMixin = {
           page,
           pageSize: itemsPerPage,
         };
-        let  { data: resData }  = await this.getAll(pageConfig);
+        let { data: resData } = await this.getAll(pageConfig);
         this.gridData = resData.data;
         this.totalItemsLength = resData.total;
       },

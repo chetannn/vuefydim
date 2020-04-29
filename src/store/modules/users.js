@@ -16,8 +16,7 @@ const users = {
       return usersService.getAll(pageConfig);
     },
     async insert({ commit }, user) {
-      let resp = await usersService.insert(user);
-      commit('SET_MESSAGE', resp.data.message);
+      return usersService.insert(user);
     },
     async delete({ commit }, id) {
       return usersService.delete(id);

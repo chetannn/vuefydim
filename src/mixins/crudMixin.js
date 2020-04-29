@@ -30,20 +30,38 @@ export const crudMixin = {
     },
     async save() {
       if (this.editedIndex > -1) {
-        const resUpdate = await this.update(this.editedItem);
-        if (resUpdate.success === 200 && resUpdate.data.success) {
-          alert('Updated!!!');
-          const { page, itemsPerPage } = this.pagination;
-          const pageConfig = {
-            page,
-            pageSize: itemsPerPage,
-          };
-          await this.getAll(pageConfig);
+        try {
+          const resUpdate = await this.update(this.editedItem);
+          if (resUpdate.status === 200 && resUpdate.data.success) {
+            setTimeout(() => {
+              this.$store.dispatch('setSnackbar', {
+                show: true,
+                text: 'Updated Data Successfully',
+              });
+            }, 500);
+            const { page, itemsPerPage } = this.pagination;
+            const pageConfig = {
+              page,
+              pageSize: itemsPerPage,
+            };
+            await this.getAll(pageConfig);
+          }
+        } catch (error) {
+          this.$store.dispatch('setSnackbar', {
+            show: true,
+            text: 'Something went wrong!!!',
+            color: 'error',
+          });
         }
       } else {
         const resInsert = await this.insert(this.editedItem);
-        if (resInsert.success === 200 && resInsert.data.success) {
-          alert('Saved!!!');
+        if (resInsert.status === 200 && resInsert.data.success) {
+          setTimeout(() => {
+            this.$store.dispatch('setSnackbar', {
+              show: true,
+              text: 'Added Data Successfully',
+            });
+          }, 500);
           const { page, itemsPerPage } = this.pagination;
           const pageConfig = {
             page,
@@ -77,8 +95,14 @@ export const crudMixin = {
       if (res) {
         this.delete(item.id).then((response) => {
           if (response.status == 200 && response.data.success) {
-            const index = this.gridData.indexOf(item);
-            this.gridData.splice(index, 1);
+            setTimeout(() => {
+              this.$store.dispatch('setSnackbar', {
+                show: true,
+                text: response.data.message,
+              });
+              const index = this.gridData.indexOf(item);
+              this.gridData.splice(index, 1);
+            }, 500);
           }
         });
       }
@@ -91,14 +115,22 @@ export const crudMixin = {
     },
     pagination: {
       async handler() {
-        const { page, itemsPerPage } = this.pagination;
-        const pageConfig = {
-          page,
-          pageSize: itemsPerPage,
-        };
-        let { data: resData } = await this.getAll(pageConfig);
-        this.gridData = resData.data;
-        this.totalItemsLength = resData.total;
+        try {
+          const { page, itemsPerPage } = this.pagination;
+          const pageConfig = {
+            page,
+            pageSize: itemsPerPage,
+          };
+          let { data: resData } = await this.getAll(pageConfig);
+          this.gridData = resData.data;
+          this.totalItemsLength = resData.total;
+        } catch (error) {
+          this.$store.dispatch('setSnackbar', {
+            show: true,
+            text: 'Something went wrong!!!',
+            color: 'error',
+          });
+        }
       },
     },
   },

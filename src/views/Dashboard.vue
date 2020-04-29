@@ -37,7 +37,11 @@
                       <v-text-field outlined v-model="editedItem.program_name" label="Program Name"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="12">
-                      <v-textarea outlined label="Program Description" v-model="editedItem.program_description"></v-textarea>
+                      <v-textarea
+                        outlined
+                        label="Program Description"
+                        v-model="editedItem.program_description"
+                      ></v-textarea>
                     </v-col>
                     <v-col cols="12" md="12" sm="6">
                       <v-checkbox v-model="editedItem.status" label="Status"></v-checkbox>
@@ -98,16 +102,16 @@ export default {
       program_name: '',
       program_description: '',
       status: true
-    }
+    },
   }),
   methods: {
     ...mapActions(defaultActionTypes)
   },
-   computed: {
+  computed: {
     formTitle() {
       return this.editedIndex === -1 ? 'New Program' : 'Edit Program';
-    },
-  },
+    }
+  }
 };
 </script>
 

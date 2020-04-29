@@ -117,7 +117,7 @@ export default {
   methods: {
     ...mapActions(defaultActionTypes)
   },
-   computed: {
+  computed: {
     formTitle() {
       return this.editedIndex === -1 ? 'New User' : 'Edit User';
     },

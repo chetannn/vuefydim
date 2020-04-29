@@ -10,6 +10,7 @@
     <Navbar navTitle="Project Manager" @toggleDrawer="toggleDrawer" @toggleTheme="toggleTheme" />
 
     <Content />
+    <AppSnackbar />
     <Footer />
   </v-app>
 </template>
@@ -20,12 +21,15 @@ import Footer from '@/components/layout/Footer';
 import NavigationDrawer from '@/components/layout/NavigationDrawer';
 import Content from '@/components/layout/Content';
 
+import AppSnackbar from '@/components/common/AppSnackbar';
+
 export default {
   components: {
     Navbar,
     Footer,
     NavigationDrawer,
-    Content
+    Content,
+    AppSnackbar
   },
   data: () => ({
     drawer: false,

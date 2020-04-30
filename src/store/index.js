@@ -11,14 +11,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     showSnackBar: false,
-    snackBarText: 'Hello World',
-    snackBarColor: 'success'
+    snackBarText: '',
+    snackBarColor: '',
+    snackBarPosition: ''
   },
   mutations: {
     [SET_SNACKBAR](state, payload) {
       state.showSnackBar = payload.show
       state.snackBarText = payload.text
       state.snackBarColor = payload.color || 'success'
+      state.snackBarPosition = payload.position || 'bottom'
     }
   },
   actions: {

@@ -129,6 +129,7 @@ export const crudMixin = {
             show: true,
             text: 'Something went wrong!!!',
             color: 'error',
+            position: 'top'
           });
         }
       },

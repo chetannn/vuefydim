@@ -44,7 +44,9 @@ export const crudMixin = {
               page,
               pageSize: itemsPerPage,
             };
-            await this.getAll(pageConfig);
+            let { data: resData } = await this.getAll(pageConfig);
+            this.gridData = resData.data;
+            this.totalItemsLength = resData.total;
           }
         } catch (error) {
           this.$store.dispatch('setSnackbar', {
@@ -67,7 +69,9 @@ export const crudMixin = {
             page,
             pageSize: itemsPerPage,
           };
-          await this.getAll(pageConfig);
+          let { data: resData } = await this.getAll(pageConfig);
+          this.gridData = resData.data;
+          this.totalItemsLength = resData.total;
         }
       }
       this.close();

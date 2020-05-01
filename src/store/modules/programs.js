@@ -16,9 +16,8 @@ const programs = {
     async getAll({ commit }, pageConfig) {
       return programService.getAll(pageConfig);
     },
-    async save({ commit }, program) {
-      let resp = await programService.save(program);
-      commit(SET_MESSAGE, resp.data.message);
+    async insert({ commit }, program) {
+      return programService.insert(program);
     },
     async delete({ commit }, id) {
       return programService.delete(id);

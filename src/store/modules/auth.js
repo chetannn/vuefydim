@@ -25,7 +25,9 @@ const auth = {
   actions: {
     async login({ commit }, user) {
       let response = await authService.login(user);
-      commit(SET_AUTH_TOKEN, response.data.token);
+      if(response.data.token !== null) {
+        commit(SET_AUTH_TOKEN, response.data.token);
+      }
     },
     logout({ commit }) {
       commit(CLEAR_AUTH_TOKEN);

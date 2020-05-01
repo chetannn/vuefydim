@@ -51,8 +51,16 @@ export default {
         password: vm.password
       };
       this.$store.dispatch('login', user).then(() => {
-        this.$router.push({ name: 'Users' });
-      });
+        vm.$router.push({ name: 'Users' });
+      }).catch(error => {
+        console.log('error', error)
+        vm.$store.dispatch('setSnackbar', {
+            show: true,
+            text: 'Something went wrong!!!',
+            color: 'error',
+            position: 'top'
+          });
+      })
     }
   },
   computed: {

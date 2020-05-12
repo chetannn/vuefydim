@@ -1,5 +1,5 @@
 import authService from '@/services/authService';
-import { SET_AUTH_TOKEN, CLEAR_AUTH_TOKEN } from '../mutation-types';
+import { SET_AUTH_TOKEN, CLEAR_AUTH_TOKEN,CLEAR_DARK_MODE_STATUS } from '../mutation-types';
 import { setAuthHeader } from '@/utils/utils'
 
 const auth = {
@@ -21,6 +21,9 @@ const auth = {
       localStorage.removeItem('token');
       location.reload();
     },
+    CLEAR_DARK_MODE_STATUS() {
+      localStorage.removeItem('darkMode');
+    }
   },
   actions: {
     async login({ commit }, user) {
@@ -30,6 +33,7 @@ const auth = {
       }
     },
     logout({ commit }) {
+      commit(CLEAR_DARK_MODE_STATUS);
       commit(CLEAR_AUTH_TOKEN);
     },
   },

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { authComputed  } from '@/store/helpers'
+import { authComputed } from '@/store/helpers'
 
 export default {
   data: () => ({
@@ -45,33 +45,36 @@ export default {
   }),
   methods: {
     login() {
-      const vm = this;
+      const vm = this
       const user = {
         username: vm.username,
         password: vm.password
-      };
-      this.$store.dispatch('login', user).then(() => {
-        vm.$router.push({ name: 'Users' });
-      }).catch(error => {
-        console.log('error', error)
-        vm.$store.dispatch('setSnackbar', {
+      }
+      this.$store
+        .dispatch('login', user)
+        .then(() => {
+          vm.$router.push({ name: 'Users' })
+        })
+        .catch(error => {
+          console.log('error', error)
+          vm.$store.dispatch('setSnackbar', {
             show: true,
             text: 'Something went wrong!!!',
             color: 'error',
             position: 'top'
-          });
-      })
+          })
+        })
     }
   },
   computed: {
     ...authComputed
   },
   created() {
-    if(this.loggedIn) {
-      this.$router.push({ name: 'Users'})
+    if (this.loggedIn) {
+      this.$router.push({ name: 'Users' })
     }
   }
-};
+}
 </script>
 
 <style>

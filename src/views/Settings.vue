@@ -32,19 +32,19 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { SET_APP_BAR_COLOR } from '@/store/mutation-types';
+import { mapState } from 'vuex'
+import { SET_APP_BAR_COLOR } from '@/store/mutation-types'
 
 export default {
   methods: {
     colorUpdate(colorOption) {
-      this.$store.commit(SET_APP_BAR_COLOR, colorOption.hexa);
+      this.$store.commit(SET_APP_BAR_COLOR, colorOption.hexa)
     }
   },
   computed: {
     ...mapState(['appBarColor'])
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

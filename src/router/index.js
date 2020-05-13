@@ -1,21 +1,21 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import routes from './routes';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import routes from './routes'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [...routes],
-});
+  routes: [...routes]
+})
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem('token');
-  if (to.matched.some((record) => record.meta.requiresAuth) && !loggedIn) {
-    next('/');
+  const loggedIn = localStorage.getItem('token')
+  if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    next('/')
   }
-  next();
-});
+  next()
+})
 
-export default router;
+export default router

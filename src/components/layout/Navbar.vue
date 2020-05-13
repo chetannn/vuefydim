@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { authComputed } from '@/store/helpers';
+import { authComputed } from '@/store/helpers'
 
 export default {
   name: 'Navbar',
@@ -69,11 +69,11 @@ export default {
   },
   methods: {
     logout() {
-      console.log('logout');
-      this.$store.dispatch('logout');
+      console.log('logout')
+      this.$store.dispatch('logout')
     }
   }
-};
+}
 </script>
 
 <style>

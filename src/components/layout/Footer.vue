@@ -1,15 +1,14 @@
 <template>
-   <v-footer app>
-      <!-- -->
-    </v-footer>
+  <v-footer app>
+    <!-- -->
+  </v-footer>
 </template>
 
 <script>
 export default {
-    name: 'Footer'
+  name: 'Footer'
 }
 </script>
 
 <style>
-
 </style>

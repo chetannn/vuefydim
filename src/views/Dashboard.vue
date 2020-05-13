@@ -78,10 +78,10 @@
 
 <script>
 // mixins
-import { crudMixin } from '@/mixins/crudMixin';
-import { createNamespacedHelpers } from 'vuex';
-const { mapState, mapActions } = createNamespacedHelpers('programs');
-import { defaultActionTypes } from '@/store/helpers';
+import { crudMixin } from '@/mixins/crudMixin'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('programs')
+import { defaultActionTypes } from '@/store/helpers'
 
 export default {
   mixins: [crudMixin],
@@ -102,17 +102,17 @@ export default {
       program_name: '',
       program_description: '',
       status: true
-    },
+    }
   }),
   methods: {
     ...mapActions(defaultActionTypes)
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? 'New Program' : 'Edit Program';
+      return this.editedIndex === -1 ? 'New Program' : 'Edit Program'
     }
   }
-};
+}
 </script>
 
 <style>

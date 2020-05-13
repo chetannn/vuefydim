@@ -4,10 +4,9 @@
 
 <script>
 export default {
-    name: 'Profile'
+  name: 'Profile'
 }
 </script>
 
 <style>
-
 </style>

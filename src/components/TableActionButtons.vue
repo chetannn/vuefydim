@@ -11,8 +11,8 @@
 
 <script>
 export default {
-    name: 'TableActionButtons'
-};
+  name: 'TableActionButtons'
+}
 </script>
 
 <style>

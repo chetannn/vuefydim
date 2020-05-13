@@ -21,14 +21,14 @@
 </template>
 
 <script>
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import NavigationDrawer from '@/components/layout/NavigationDrawer';
-import Content from '@/components/layout/Content';
+import Navbar from '@/components/layout/Navbar'
+import Footer from '@/components/layout/Footer'
+import NavigationDrawer from '@/components/layout/NavigationDrawer'
+import Content from '@/components/layout/Content'
 
-import AppSnackbar from '@/components/common/AppSnackbar';
+import AppSnackbar from '@/components/common/AppSnackbar'
 
-import { authComputed } from '@/store/helpers';
+import { authComputed } from '@/store/helpers'
 
 export default {
   components: {
@@ -50,28 +50,28 @@ export default {
   }),
   methods: {
     toggleTheme() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      localStorage.setItem('darkMode', this.$vuetify.theme.dark);
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+      localStorage.setItem('darkMode', this.$vuetify.theme.dark)
     },
     toggleDrawer() {
-      this.drawer = !this.drawer;
+      this.drawer = !this.drawer
     }
   },
   computed: {
     hasDarkMode() {
-      return this.$vuetify.theme.dark;
+      return this.$vuetify.theme.dark
     },
     ...authComputed
   },
   created() {
-    const darkMode = localStorage.getItem('darkMode');
+    const darkMode = localStorage.getItem('darkMode')
     if (darkMode === 'true') {
-      this.$vuetify.theme.dark = true;
+      this.$vuetify.theme.dark = true
     } else {
-      this.$vuetify.theme.dark = false;
+      this.$vuetify.theme.dark = false
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

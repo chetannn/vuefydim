@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Settings Page</h1>
     <v-card class="mx-auto" max-width="600">
       <v-card-title>
         <h3>Application Settings</h3>
@@ -11,8 +10,15 @@
         <v-form>
           <v-text-field v-model="$store.state.appBarTitle" outlined label="App Title"></v-text-field>
           <v-text-field v-model="$store.state.appBarSubtitle" outlined label="App Subtitle"></v-text-field>
-          <v-label>Choose Color Theme</v-label>
-          <v-color-picker swatches-max-height="50" hide-inputs v-model="color" class="mb-4"></v-color-picker>
+          <v-label>Choose Appbar Color</v-label>
+          <v-color-picker
+            @update:color="colorUpdate"
+            swatches-max-height="50"
+            hide-inputs
+            mode="hexa"
+            :value="appBarColor"
+            class="mb-4"
+          ></v-color-picker>
         </v-form>
       </v-card-text>
 
@@ -26,20 +32,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { SET_APP_BAR_COLOR } from '@/store/mutation-types';
+
 export default {
-  data() {
-    return {
-      color: ''
-    };
-  },
-  methods: {},
-  mounted() {
-    console.log('root', this.$root);
-  },
-  watch: {
-    color(val) {
-      this.$store.state.appBarColor = val;
+  methods: {
+    colorUpdate(colorOption) {
+      this.$store.commit(SET_APP_BAR_COLOR, colorOption.hexa);
     }
+  },
+  computed: {
+    ...mapState(['appBarColor'])
   }
 };
 </script>

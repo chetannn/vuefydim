@@ -3,12 +3,16 @@
     <NavigationDrawer
       :drawer="drawer"
       :links="links"
-      drawerTitle="Project Management"
-      drawerSubtitle="here"
+      :drawerTitle="$store.state.appBarTitle"
+      :drawerSubtitle="$store.state.appBarSubtitle"
       v-if="loggedIn"
     />
 
-    <Navbar navTitle="Project Manager" @toggleDrawer="toggleDrawer" @toggleTheme="toggleTheme" />
+    <Navbar
+      :navTitle="$store.state.appBarTitle"
+      @toggleDrawer="toggleDrawer"
+      @toggleTheme="toggleTheme"
+    />
 
     <Content />
     <AppSnackbar />
@@ -24,7 +28,7 @@ import Content from '@/components/layout/Content';
 
 import AppSnackbar from '@/components/common/AppSnackbar';
 
-import { authComputed  } from '@/store/helpers'
+import { authComputed } from '@/store/helpers';
 
 export default {
   components: {
@@ -49,7 +53,7 @@ export default {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       localStorage.setItem('darkMode', this.$vuetify.theme.dark);
     },
-    toggleDrawer() {  
+    toggleDrawer() {
       this.drawer = !this.drawer;
     }
   },

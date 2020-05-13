@@ -9,10 +9,10 @@
       <v-divider></v-divider>
       <v-card-text>
         <v-form>
-          <v-text-field outlined label="App Title"></v-text-field>
-          <v-text-field outlined label="App Subtitle"></v-text-field>
+          <v-text-field v-model="$store.state.appBarTitle" outlined label="App Title"></v-text-field>
+          <v-text-field v-model="$store.state.appBarSubtitle" outlined label="App Subtitle"></v-text-field>
           <v-label>Choose Color Theme</v-label>
-          <v-color-picker v-model="color" class="mb-4" show-swatches></v-color-picker>
+          <v-color-picker swatches-max-height="50" hide-inputs v-model="color" class="mb-4"></v-color-picker>
         </v-form>
       </v-card-text>
 
@@ -35,6 +35,11 @@ export default {
   methods: {},
   mounted() {
     console.log('root', this.$root);
+  },
+  watch: {
+    color(val) {
+      this.$store.state.appBarColor = val;
+    }
   }
 };
 </script>

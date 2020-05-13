@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar flat dense color="primary" dark app>
+  <v-app-bar flat dense :color="$store.state.appBarColor" dark app>
     <v-app-bar-nav-icon @click="$emit('toggleDrawer')"></v-app-bar-nav-icon>
     <v-toolbar-title class="white--text">{{navTitle}}</v-toolbar-title>
     <v-spacer></v-spacer>

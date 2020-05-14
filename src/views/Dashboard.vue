@@ -17,10 +17,10 @@
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on }">
-              <v-btn color="primary" rounded dark class="mb-2 ml-2" v-on="on">
+              <v-btn color="primary" dark class="mb-2 ml-2" v-on="on">
                 <v-icon>mdi-plus</v-icon>New
               </v-btn>
-              <v-btn class="mb-2" color="warning" rounded>
+              <v-btn class="mb-2" color="warning">
                 <v-icon>mdi-autorenew</v-icon>Reload
               </v-btn>
             </template>
@@ -52,8 +52,8 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="info" class="white--text" rounded @click="close">Cancel</v-btn>
-                <v-btn color="green" class="white--text" rounded @click="save">Save</v-btn>
+                <v-btn color="info" class="white--text" @click="close">Cancel</v-btn>
+                <v-btn color="green" class="white--text" @click="save">Save</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>

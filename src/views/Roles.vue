@@ -9,7 +9,13 @@
       :items="gridData"
       :options.sync="pagination"
       class="elevation-1"
-    />
+    >
+      <template v-slot:top>
+        <v-toolbar flat>
+          <v-toolbar-title>All Roles</v-toolbar-title>
+        </v-toolbar>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
@@ -17,7 +23,7 @@
 import { crudMixin } from '@/mixins/crudMixin'
 import { createNamespacedHelpers } from 'vuex'
 
-const { mapActions } = createNamespacedHelpers('users')
+const { mapActions } = createNamespacedHelpers('roles')
 import { defaultActionTypes } from '@/store/helpers'
 export default {
   mixins: [crudMixin],

@@ -14,7 +14,6 @@
           <v-color-picker
             @update:color="colorUpdate"
             swatches-max-height="50"
-            hide-inputs
             mode="hexa"
             :value="appBarColor"
             class="mb-4"

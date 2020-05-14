@@ -28,6 +28,7 @@
 
             <v-card>
               <v-card-title>
+                <v-icon left>mdi-account</v-icon>
                 <span class="headline">{{ formTitle }}</span>
               </v-card-title>
 

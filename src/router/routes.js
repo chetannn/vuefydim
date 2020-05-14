@@ -5,6 +5,7 @@ import Dashboard from '../views/Dashboard.vue'
 import Settings from '../views/Settings.vue'
 import Users from '../views/Users.vue'
 import Profile from '../views/Profile.vue'
+import Roles from '../views/Roles.vue'
 
 const routes = [
   {
@@ -53,6 +54,12 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/roles',
+    name: 'Roles',
+    component: Roles,
     meta: { requiresAuth: true }
   }
 ]

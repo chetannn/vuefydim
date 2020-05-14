@@ -13,15 +13,15 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
+          <v-toolbar-title>All Users</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on }">
-              <v-btn color="primary" rounded dark class="mb-2 ml-2" v-on="on">
+              <v-btn color="primary" dark class="mb-2 ml-2" v-on="on">
                 <v-icon>mdi-plus</v-icon>New
               </v-btn>
-              <v-btn class="mb-2" color="warning" rounded>
+              <v-btn class="mb-2" color="warning">
                 <v-icon>mdi-autorenew</v-icon>Reload
               </v-btn>
             </template>
@@ -57,8 +57,8 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="info" class="white--text" rounded @click="close">Cancel</v-btn>
-                <v-btn color="green" class="white--text" rounded @click="save">Save</v-btn>
+                <v-btn color="info" class="white--text" @click="close">Cancel</v-btn>
+                <v-btn color="green" class="white--text" @click="save">Save</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -83,14 +83,14 @@
 
 <script>
 //mixin
-import { crudMixin } from '@/mixins/crudMixin';
+import { crudMixin } from '@/mixins/crudMixin'
 
-import { createNamespacedHelpers } from 'vuex';
-const {  mapActions } = createNamespacedHelpers('users');
-import { defaultActionTypes } from '@/store/helpers';
+import { createNamespacedHelpers } from 'vuex'
+const { mapActions } = createNamespacedHelpers('users')
+import { defaultActionTypes } from '@/store/helpers'
 
 export default {
-    mixins: [crudMixin],
+  mixins: [crudMixin],
   data: () => ({
     headers: [
       { text: 'Id', value: 'id' },
@@ -119,10 +119,10 @@ export default {
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? 'New User' : 'Edit User';
-    },
-  },
-};
+      return this.editedIndex === -1 ? 'New User' : 'Edit User'
+    }
+  }
+}
 </script>
 
 <style>

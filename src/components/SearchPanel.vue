@@ -12,10 +12,10 @@
         </v-row>
 
         <v-row>
-          <v-btn class="mr-4" rounded color="primary">
+          <v-btn class="mr-4" color="primary">
             <v-icon>mdi-magnify</v-icon>Search
           </v-btn>
-          <v-btn rounded class="info">
+          <v-btn class="info">
             <v-icon>mdi-autorenew</v-icon>Reset
           </v-btn>
         </v-row>

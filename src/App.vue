@@ -44,6 +44,7 @@ export default {
       { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/dashboard' },
       { icon: 'mdi-folder', text: 'Projects', route: '/projects' },
       { icon: 'mdi-account', text: 'Users', route: '/users' },
+      { icon: 'mdi-plus-circle', text: 'Roles', route: '/roles' },
       { icon: 'mdi-school', text: 'Students', route: '/students' },
       { icon: 'mdi-wrench', text: 'Settings', route: '/settings' }
     ]

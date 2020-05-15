@@ -6,6 +6,7 @@ import Settings from '../views/Settings.vue'
 import Users from '../views/Users.vue'
 import Profile from '../views/Profile.vue'
 import Roles from '../views/Roles.vue'
+import Projects from '../views/Projects.vue'
 
 const routes = [
   {
@@ -60,6 +61,12 @@ const routes = [
     path: '/roles',
     name: 'Roles',
     component: Roles,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/projects',
+    name: 'Projects',
+    component: Projects,
     meta: { requiresAuth: true }
   }
 ]

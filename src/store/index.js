@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import auth from './modules/auth'
 import programs from './modules/programs'
 import users from './modules/users'
+import roles from './modules/roles'
 
 import { SET_SNACKBAR, SET_APP_BAR_COLOR } from './mutation-types'
 
@@ -37,6 +38,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     programs,
-    users
+    users,
+    roles
   }
 })

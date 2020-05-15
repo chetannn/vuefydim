@@ -1,7 +1,7 @@
 import programService from '@/services/programService'
 import { SET_MESSAGE } from '../mutation-types'
 
-const programs = {
+export const programs = {
   namespaced: true,
   state: {
     message: ''

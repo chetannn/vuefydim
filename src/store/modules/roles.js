@@ -1,4 +1,4 @@
-const roles = {
+export const roles = {
   state: {},
 
   mutations: {},

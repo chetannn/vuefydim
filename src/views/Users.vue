@@ -8,6 +8,7 @@
       :headers="headers"
       :items="gridData"
       :options.sync="pagination"
+      :loading="isLoading"
       sort-by="calories"
       class="elevation-1"
     >

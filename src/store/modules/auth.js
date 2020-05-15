@@ -6,7 +6,7 @@ import {
 } from '../mutation-types'
 import { setAuthHeader } from '@/utils/utils'
 
-const auth = {
+export const auth = {
   state: {
     token: localStorage.getItem('token') || null
   },

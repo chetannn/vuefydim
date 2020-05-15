@@ -17,7 +17,8 @@ export const crudMixin = {
       totalItemsLength: 0,
       perPage: 5,
       dialog: false,
-      pagination: {}
+      pagination: {},
+      isLoading: true
     }
   },
   methods: {
@@ -26,6 +27,7 @@ export const crudMixin = {
       this.getAll(pageConfig).then(({ data: resData }) => {
         this.gridData = resData.data
         this.totalItemsLength = resData.total
+        this.isLoading = false
       })
     },
     async save() {
@@ -128,6 +130,7 @@ export const crudMixin = {
           let { data: resData } = await this.getAll(pageConfig)
           this.gridData = resData.data
           this.totalItemsLength = resData.total
+          this.isLoading = false
         } catch (error) {
           this.$store.dispatch('setSnackbar', {
             show: true,

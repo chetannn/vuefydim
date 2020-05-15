@@ -1,6 +1,6 @@
 import usersService from '@/services/usersService'
 
-const users = {
+export const users = {
   namespaced: true,
   state: {
     message: ''

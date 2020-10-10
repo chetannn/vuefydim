@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="grey lighten-5">
     <NavigationDrawer
       :drawer="drawer"
       :links="links"
@@ -40,12 +40,12 @@ export default {
   data: () => ({
     drawer: false,
     links: [
-      { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/dashboard' },
-      { icon: 'mdi-folder', text: 'Projects', route: '/projects' },
-      { icon: 'mdi-account', text: 'Users', route: '/users' },
-      { icon: 'mdi-plus-circle', text: 'Roles', route: '/roles' },
-      { icon: 'mdi-school', text: 'Students', route: '/students' },
-      { icon: 'mdi-wrench', text: 'Settings', route: '/settings' }
+      { icon: 'mdi-view-dashboard-outline', text: 'Dashboard', route: '/dashboard' },
+      { icon: 'mdi-folder-outline', text: 'Projects', route: '/projects' },
+      { icon: 'mdi-account-outline', text: 'Users', route: '/users' },
+      { icon: 'mdi-plus-circle-outline', text: 'Roles', route: '/roles' },
+      { icon: 'mdi-school-outline', text: 'Students', route: '/students' },
+      { icon: 'mdi-wrench-outline', text: 'Settings', route: '/settings' }
     ]
   }),
   methods: {

@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar flat dense :color="$store.state.appBarColor" dark app>
+  <v-app-bar flat dense light app>
     <v-app-bar-nav-icon @click="$emit('toggleDrawer')"></v-app-bar-nav-icon>
-    <v-toolbar-title class="white--text">{{navTitle}}</v-toolbar-title>
+    <v-toolbar-title>{{navTitle}}</v-toolbar-title>
     <v-spacer></v-spacer>
 
     <v-btn v-if="loggedIn" text to="/register" rounded class="mr-4">Register</v-btn>
@@ -15,7 +15,7 @@
       <v-icon class="mr-4">mdi-bell-outline</v-icon>
     </v-btn>
 
-    <v-menu v-if="!loggedIn" class="mr-4" offset-y>
+    <v-menu v-if="!loggedIn" class="mr-4 elevation-0" offset-y>
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
           <v-avatar size="40">

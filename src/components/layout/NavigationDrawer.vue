@@ -9,7 +9,7 @@
 
     <v-divider></v-divider>
 
-    <v-list v-if="loggedIn">
+    <v-list>
       <v-list-item v-for="item in links" :to="item.route" :key="item.text" link>
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>

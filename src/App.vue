@@ -5,7 +5,6 @@
       :links="links"
       :drawerTitle="$store.state.appBarTitle"
       :drawerSubtitle="$store.state.appBarSubtitle"
-      v-if="loggedIn"
     />
 
     <Navbar

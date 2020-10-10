@@ -36,32 +36,32 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    meta: { requiresAuth: true },
+    // meta: { requiresAuth: true },
     component: Dashboard
   },
   {
     path: '/settings',
     name: 'Settings',
-    meta: { requiresAuth: true },
+    // meta: { requiresAuth: true },
     component: Settings
   },
   {
     path: '/users',
     name: 'Users',
     component: Users,
-    meta: { requiresAuth: true }
+    // meta: { requiresAuth: true }
   },
   {
     path: '/profile',
     name: 'Profile',
     component: Profile,
-    meta: { requiresAuth: true }
+    // meta: { requiresAuth: true }
   },
   {
     path: '/roles',
     name: 'Roles',
     component: Roles,
-    meta: { requiresAuth: true }
+    // meta: { requiresAuth: true }
   },
   {
     path: '/projects',

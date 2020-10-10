@@ -8,6 +8,7 @@
       :headers="headers"
       :items="gridData"
       :options.sync="pagination"
+      :loading="isLoading"
       class="elevation-1"
     >
       <template v-slot:top>
